@@ -4,13 +4,47 @@ function ToJavaConverter(jsonReader, className){
 	this.jsonReader = jsonReader;
 	this.className = className;
 	
-	this.javaString = this.writeNewClassBeginning(className);
+	this.javaString = this.writeNewClassBeginning();
 	this.javaString += this.writePrimitiveProperties();
+	this.javaString += this.writeObjects();
+	this.javaString += this.writeArrays();
+	this.javaString += this.writeConstructor();
 	this.javaString += this.writePrimitiveGetters();
 	this.javaString += this.writePrimitiveSetters();
-	this.javaString += this.writeMain();
+	this.javaString += this.writeObjectGetSetters();
+	this.javaString += this.writeArrayGetSetters();
 	
-	this.javaString += "}";
+	this.javaString += "}\n";
+};
+
+ToJavaConverter.writeClasses = function(){
+	var str = "";
+	for (var name in JsonClassReader.classes){
+		str += new ToJavaConverter(JsonClassReader.classes[name],name).javaString;
+		
+	}
+	
+	
+	return str;
+};
+
+ToJavaConverter.prototype.writeObjects = function(){
+	var str = "";
+	for (var name in this.jsonReader.objects){
+		str += "\tprivate " + this.jsonReader.objects[name].className + " " + name + ";\n";
+	}
+	
+	return str;
+};
+
+ToJavaConverter.prototype.writeArrays = function(){
+	var str = "";
+	for (var name in this.jsonReader.arrays){
+		str += "\tprivate ArrayList<" + ToJavaConverter.convertToSpecificName(this.jsonReader.arrays[name].type) + "> " + name +
+				" = new ArrayList<" + ToJavaConverter.convertToSpecificName(this.jsonReader.arrays[name].type) +  ">();\n";
+	}
+	
+	return str;
 };
 
 ToJavaConverter.prototype.writePrimitiveProperties = function(){
@@ -34,6 +68,14 @@ ToJavaConverter.prototype.writePrimitiveProperties = function(){
 	return str;
 };
 
+ToJavaConverter.prototype.writeConstructor = function(){
+	var str	= "\tpublic " + this.className + "(){\n";
+	str += "\t\t\n";
+	str += "\t}\n";
+	
+	return str;
+};
+
 ToJavaConverter.prototype.writePrimitiveGetters = function(){
 	var str = "";
 	for (var name in this.jsonReader.integers){
@@ -49,7 +91,7 @@ ToJavaConverter.prototype.writePrimitiveGetters = function(){
 	}
 	
 	for (var name in this.jsonReader.bools){
-		str += "\tpublic bool is" + name.capitalizeFirstLetter() + "(){\n";
+		str += "\tpublic boolean is" + name.capitalizeFirstLetter() + "(){\n";
 		str += "\t\treturn " + name + ";\n";
 		str += "\t}\n";
 	}
@@ -93,7 +135,39 @@ ToJavaConverter.prototype.writePrimitiveSetters = function(){
 	return str;
 };
 
-ToJavaConverter.prototype.writeMain = function(){
+ToJavaConverter.prototype.writeObjectGetSetters = function(){
+	var str = "";
+	for (var name in this.jsonReader.objects){
+		str += "\tpublic " + this.jsonReader.objects[name].className + " get" + name.capitalizeFirstLetter() + "(){\n";
+		str += "\t\treturn " + name +";\n";
+		str += "\t}\n";
+		
+		str += "\tpublic void set" + name.capitalizeFirstLetter()  + "(" + this.jsonReader.objects[name].className + " " + name + "){\n";
+		str += "\t\tthis." + name + " = " + name + ";\n";
+		str += "\t}\n";
+	}
+	
+	return str;
+	
+};
+
+
+ToJavaConverter.prototype.writeArrayGetSetters = function(){
+	var str = "";
+	for (var name in this.jsonReader.arrays){
+		str += "\tpublic ArrayList<" + ToJavaConverter.convertToSpecificName(this.jsonReader.arrays[name].type) + "> get" + name.capitalizeFirstLetter()+ "(){\n";
+		str += "\t\treturn " + name +";\n";
+		str += "\t}\n";
+		
+		str += "\tpublic void set" + name.capitalizeFirstLetter() + "(ArrayList<" + ToJavaConverter.convertToSpecificName(this.jsonReader.arrays[name].type) + "> " + name + "){\n";
+		str += "\t\tthis." + name + " = " + name + ";\n";
+		str += "\t}\n";
+	}
+	
+	return str;
+};
+
+ToJavaConverter.writeMain = function(){
 	var str = "\tpublic static void main(String[] args){\n";
 	str += "\t\t" + this.className + " obj = new " + this.className + "();\n";
 	
@@ -119,12 +193,30 @@ ToJavaConverter.prototype.writeMain = function(){
 };
 
 
-ToJavaConverter.prototype.writeNewClassBeginning = function(className){
-	return "public class " + className + "{\n";
+
+ToJavaConverter.prototype.writeNewClassBeginning = function(){
+	return "public class " + this.className + "{\n";
 };
 
 ToJavaConverter.prototype.writeClassEnding = function(){
 	return "}";
 };
 
+
+ToJavaConverter.convertToSpecificName = function(str){
+	switch (str){
+		case "int":
+			return "Integer";
+		case "float": 
+			return "Float";
+		case "boolean":
+			return "Boolean";
+		case "string":
+			return "String";
+		case "object":
+			return "Object";
+	}
+	
+	return str;
+};
 

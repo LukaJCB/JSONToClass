@@ -1,43 +1,5 @@
 'use strict';
 
-function JsonReader(jsonString){
-    this.json = JSON.parse(jsonString);
-    this.integers = [];
-	this.floats = [];
-	this.strings= [];
-	this.bools = [];
-	this.objects = [];
-	this.arrays = [];
-	
-	this.fillProperties();
-};
-
-JsonReader.prototype.fillProperties = function(){
-    for (var name in this.json){
-        
-        var element = this.json[name];
-		
-        if (isInt(element)){
-            this.integers[name] = element;
-			
-        } else if(isFloat(element)){
-			this.floats[name] = element;
-			
-        } else if (typeof element === "string"){
-			this.strings[name] = element;
-			
-        } else if (typeof element === "boolean"){
-			this.bools[name] = element;
-			
-		} else if (typeof element === "object"){
-			this.objects[name] = element;
-			
-		} else if (typeof element === "array"){
-			this.arrays[name] = element;
-		}
-    }
-};
-
 function isInt(n){
     return Number(n) === n && n % 1 === 0;
 }
@@ -66,9 +28,17 @@ function downloadData(text,name,fileEnding){
 }
 
 $( window ).load(function() {
-	var conv = new JsonReader('{"firstName":"John", "lastName":"Doe" , "bro": 2.3, "breh": 50}');
-	var str = new ToJavaConverter(conv,"ClassA").javaString;
-	downloadData(str,"ClassA","java");
+	$("#downloadlink").click(function(e) {
+		var json = $("#json").val();
+			//'{"size": 24.5,"color":{"red":"f","green":"000628","blue": "f"}, "r" : {"rs":[{"red": "f", "green": "0"},{"red" : "0", "green" : "f"}],  "gs":[4,5,2,4], "bs":["hello","world",6]}}';
+		JsonClassReader.setEnclosingClass( new JsonClassReader(json, "Window"));
+		var str = ToJavaConverter.writeClasses();
+		//TODO
+		console.log(str);
+		//downloadData(str,"ClassA","java");
+		e.preventDefault();
+		e.stopPropagation();
+	});
 });
 	
 
