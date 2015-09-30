@@ -71,8 +71,65 @@ ToJavaConverter.prototype.writePrimitiveProperties = function(){
 ToJavaConverter.prototype.writeConstructor = function(){
 	var str	= "\tpublic " + this.className + "(){\n";
 	str += "\t\t\n";
-	str += "\t}\n";
+	str += "\t}\n\n";
 	
+	str += "\tpublic " + this.className + "(";
+	
+	
+	for (var name in this.jsonReader.integers){
+		str += " int " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str += " float " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str += " boolean " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str += " String " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str += " " + this.jsonReader.objects[name].className + " " + name + ",";
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str += " ArrayList<" + ToJavaConverter.convertToSpecificName(this.jsonReader.arrays[name].type) + "> " + name + ","; 
+	}
+	str = str.substring(0, str.length - 1);
+	
+	str += "){\n";
+	
+	//insert body
+	for (var name in this.jsonReader.integers){
+		str += "\t\tthis." + name + " = " + name + ";\n";
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str += "\t\tthis." + name + " = " + name + ";\n";
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str += "\t\tthis." + name + " = " + name + ";\n";
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str += "\t\tthis." + name + " = " + name + ";\n";
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str += "\t\tthis." + name + " = " + name + ";\n";
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str += "\t\tthis." + name + " = " + name + ";\n";
+	}
+	
+	
+	str += "\t}\n\n";
 	return str;
 };
 

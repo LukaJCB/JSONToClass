@@ -63,9 +63,63 @@ ToSwiftConverter.prototype.writePrimitiveProperties = function(){
 };
 
 ToSwiftConverter.prototype.writeConstructor = function(){
-    var str	= "\tpublic init(){\n";
-    str += "\t\t\n";
-    str += "\t}\n";
+    var str = "\tpublic init(";
+	
+	
+	for (var name in this.jsonReader.integers){
+		str += " " + name + ": Int,";
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str += " " + name + ": Float,";
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str +=" " +  name + ": Bool,";
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str += " " + name + ": String,";
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str += " " + name + ": " + this.jsonReader.objects[name].className + ",";
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str += " " + name + ": [" + ToSwiftConverter.convertToSpecificName(this.jsonReader.arrays[name].type) + "],"; 
+	}
+	str = str.substring(0, str.length - 1);
+	
+	str += "){\n";
+	
+	//insert body
+	for (var name in this.jsonReader.integers){
+		str += "\t\tself." + name + " = " + name + "\n";
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str += "\t\tself." + name + " = " + name + "\n";
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str += "\t\tself." + name + " = " + name + "\n";
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str += "\t\tself." + name + " = " + name + "\n";
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str += "\t\tself." + name + " = " + name + "\n";
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str += "\t\tself." + name + " = " + name + "\n";
+	}
+	
+	
+	str += "\t}\n\n";
 
     return str;
 };

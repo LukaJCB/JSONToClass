@@ -66,7 +66,62 @@ ToPHPConverter.prototype.writePrimitiveProperties = function(){
 };
 
 ToPHPConverter.prototype.writeConstructor = function(){
-	var str	= "\tfunction " + this.className + "(){\n";
+	
+	
+	var str	= "\tfunction " + this.className + "(";
+	
+	for (var name in this.jsonReader.integers){
+		str += " $" + name + ","; 
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str += " $" + name + ","; 
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str += " $" + name + ","; 
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str += " $" + name + ","; 
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str += " $" + name + ","; 
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str += " $" + name + ","; 
+	}
+	str = str.substring(0, str.length - 1);
+	
+	str += "){\n";
+	
+	for (var name in this.jsonReader.integers){
+		str += "\t\t$this->" + name + " = $" + name + ";\n";
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str += "\t\t$this->" + name + " = $" + name + ";\n";
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str += "\t\t$this->" + name + " = $" + name + ";\n";
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str += "\t\t$this->" + name + " = $" + name + ";\n";
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str += "\t\t$this->" + name + " = $" + name + ";\n";
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str += "\t\t$this->" + name + " = $" + name + ";\n";
+	}
+	
+	
 	str += "\t\t\n";
 	str += "\t}\n";
 	
@@ -127,7 +182,7 @@ ToPHPConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToPHPConverter.prototype.writeClassEnding = function(){
-	return "}";
+	return "}\n?>";
 };
 
 

@@ -75,13 +75,103 @@ ToCppConverter.prototype.writePrimitiveProperties = function(){
 ToCppConverter.prototype.writeConstructorHeader = function(){
 	var str	= "public: \n";
 	str += "\t" + this.className + "();\n";
+	str += "\t" + this.className + "(";
+	
+	
+	for (var name in this.jsonReader.integers){
+		str += " int " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str += " float " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str += " bool " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str += " string& " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str += " " + this.jsonReader.objects[name].className + "& " + name + ",";
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str += " vector<" + ToCppConverter.convertToSpecificName(this.jsonReader.arrays[name].type) + ">& " + name + ","; 
+	}
+	str = str.substring(0, str.length - 1);
+	
+	str += ");\n";
+	
 	str += "\tvirtual ~" + this.className + "();\n";
+	
 	
 	return str;
 };
 
 ToCppConverter.prototype.writeConstructor = function(){
 	var str	=  this.className + "::" + this.className + "(){\n";
+	str += "}\n\n";
+	
+	str += this.className + "::"+ this.className + "(";
+	
+	
+	for (var name in this.jsonReader.integers){
+		str += " int " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str += " float " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str += " bool " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str += " string& " + name + ",";
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str += " " + this.jsonReader.objects[name].className + "& " + name + ",";
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str += " vector<" + ToCppConverter.convertToSpecificName(this.jsonReader.arrays[name].type) + ">& " + name + ","; 
+	}
+	str = str.substring(0, str.length - 1);
+	
+	str += "): ";
+	
+	//insert body
+	for (var name in this.jsonReader.integers){
+		str +=  name + " (" + name + ")" + ", ";
+	}	
+
+	for (var name in this.jsonReader.floats){
+		str +=  name + " (" + name + ")" + ", ";
+	}	
+
+	for (var name in this.jsonReader.bools){
+		str +=  name + " (" + name + ")" + ", ";
+	}	
+
+	for (var name in this.jsonReader.strings){
+		str +=  name + " (" + name + ")" + ", ";
+	}	
+
+	for (var name in this.jsonReader.objects){
+		str +=  name + " (" + name + ")" + ", ";
+	}
+
+	for (var name in this.jsonReader.arrays){
+		str +=  name + " (" + name + ")" + ", ";
+	}
+	str = str.substring(0, str.length - 2);
+	
+	str += "{\n\n";
 	str += "\t\n";
 	str += "}\n";
 	
@@ -169,25 +259,25 @@ ToCppConverter.prototype.writePrimitiveSetters = function(){
 	var str = "";
 	for (var name in this.jsonReader.integers){
 		str += "void " + this.className + "::set" + name.capitalizeFirstLetter() + "(int "+ name + "){\n";
-		str += "\tthis-> " + name + " = " + name + ";\n";
+		str += "\tthis->" + name + " = " + name + ";\n";
 		str += "}\n";
 	}
 	
 	for (var name in this.jsonReader.floats){
 		str += "void " + this.className + "::set" + name.capitalizeFirstLetter() + "(float "+ name + "){\n";
-		str += "\tthis-> " + name + " = " + name + ";\n";
+		str += "\tthis->" + name + " = " + name + ";\n";
 		str += "}\n";
 	}
 	
 	for (var name in this.jsonReader.bools){
 		str += "void " + this.className + "::set" + name.capitalizeFirstLetter() + "(bool "+ name + "){\n";
-		str += "\tthis-> " + name + " = " + name + ";\n";
+		str += "\tthis->" + name + " = " + name + ";\n";
 		str += "}\n";
 	}
 	
 	for (var name in this.jsonReader.strings){
 		str += "void " + this.className + "::set" + name.capitalizeFirstLetter() + "(string& "+ name + "){\n";
-		str += "\tthis-> " + name + " = " + name + ";\n";
+		str += "\tthis->" + name + " = " + name + ";\n";
 		str += "}\n";
 	}
 	
@@ -213,7 +303,7 @@ ToCppConverter.prototype.writeObjectGetSetters = function(){
 	
 	for (var name in this.jsonReader.objects){
 		str += "void " + this.className + "::set" + name.capitalizeFirstLetter() + "("+ this.jsonReader.objects[name].className  + "& "+ name + "){\n";
-		str += "\tthis-> " + name + " = " + name + ";\n";
+		str += "\tthis->" + name + " = " + name + ";\n";
 		str += "}\n";
 	}
 	for (var name in this.jsonReader.objects){
@@ -244,7 +334,7 @@ ToCppConverter.prototype.writeArrayGetSetters = function(){
 	
 	for (var name in this.jsonReader.arrays){
 		str += "void " + this.className + "::set" + name.capitalizeFirstLetter() + "(vector<"+ ToCppConverter.convertToSpecificName(this.jsonReader.arrays[name].type)  + ">& "+ name + "){\n";
-		str += "\tthis-> " + name + " = " + name + ";\n";
+		str += "\tthis->" + name + " = " + name + ";\n";
 		str += "}\n";
 	}
 	for (var name in this.jsonReader.arrays){
