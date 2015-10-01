@@ -76,6 +76,11 @@ JsonClassReader.prototype.deriveArrayTypes = function(){
 JsonClassReader.classes = {};
 JsonClassReader.classNameAppearances = {};
 
+JsonClassReader.clearAll = function(){
+	JsonClassReader.classes = {};
+	JsonClassReader.classNameAppearances = {};
+};
+
 JsonClassReader.setEnclosingClass = function(jsonReader){
 	JsonClassReader.addClass(jsonReader);
 	jsonReader.isEnclosingClass = true;

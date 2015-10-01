@@ -13,10 +13,28 @@
         <script src="js/ToScalaConverter.js"></script>
         <script src="js/ToPythonConverter.js"></script>
         <script src="js/JsonClassReader.js"></script>
+        <script src="js/ToRubyConverter.js"></script>
         <script src="js/Main.js"></script>
     </head>
     <body>
-        <textArea id="json"></textArea>
-		<a href="" download="info.txt" id="downloadlink">Download</a>
-    </body>
+		<form>
+			<textArea id="json"></textArea>
+			<input type="radio" name="language" value="Java"/>Java<br/>
+			<input type="radio" name="language" value="Cs"/>C#<br/>
+			<input type="radio" name="language" value="Cpp"/>C++<br/>
+			<input type="radio" name="language" value="Php"/>PHP<br/>
+			<input type="radio" name="language" value="Swift"/>Swift<br/>
+			<input type="radio" name="language" value="Python"/>Python<br/>
+			<input type="radio" name="language" value="Ruby"/>Ruby<br/>
+			<input type="radio" name="language" value="Scala"/>Scala<br/>
+			<input type="radio" name="language" value="Groovy"/>Groovy<br/>
+			<input type="radio" name="language" value="Go"/>Go<br/>
+			<input type="radio" name="language" value="ObjC"/>Objective-C<br/>
+			<input type="radio" name="language" value="Perl"/>Perl<br/>
+			<input type="radio" name="language" value="Fs"/>F#<br/>
+			<input type="radio" name="language" value="Delphi"/>Delphi<br/>
+			<input type="radio" name="language" value="Matlab"/>Matlab<br/>
+			<a href="" download="info.txt" id="downloadlink">Download</a>
+		</form>
+	</body>
 </html>
