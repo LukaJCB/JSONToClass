@@ -26,9 +26,21 @@ function JsonClassReader(jsonString, className){
 };
 
 JsonClassReader.prototype.fillProperties = function(){
+	//rename keys 
+	
+    for (var name in this.json){
+		var firstLetter = name.charAt(0);
+		if (firstLetter !== firstLetter.toLowerCase()){
+			this.json[name.decapitalize()] = this.json[name];
+			delete this.json[name];
+		}
+	}
+	
     for (var name in this.json){
         
         var element = this.json[name];
+		
+		
 		
 		if (typeof element === "string"){
 			if (isNaN(element)){
@@ -79,6 +91,10 @@ JsonClassReader.classNameAppearances = {};
 JsonClassReader.clearAll = function(){
 	JsonClassReader.classes = {};
 	JsonClassReader.classNameAppearances = {};
+};
+
+JsonClassReader.getInstanceJson = function(className) {
+	return JSON.stringify(JsonClassReader.classes[className].json);
 };
 
 JsonClassReader.setEnclosingClass = function(jsonReader){
@@ -140,7 +156,7 @@ JsonClassReader.getType = function(element,name){
 		if (name.toLowerCase().charAt(name.length-1)=== "s"){
 			newName = name.substring(0,name.length-1).capitalizeFirstLetter();
 		} else {
-			newName = name;
+			newName = name.capitalizeFirstLetter();
 		}
 		var jsonReader = new JsonClassReader(json,newName);
 		return JsonClassReader.assignCorrectClass(element,jsonReader);
@@ -165,9 +181,18 @@ JsonClassReader.getClassOfType = function(jsonReader){
 
 
 function compareKeys(a, b) {
-  var aKeys = Object.keys(a).sort();
-  var bKeys = Object.keys(b).sort();
-  return JSON.stringify(aKeys) === JSON.stringify(bKeys);
+
+	if (a["className"] ){
+		delete a.className;
+	}
+	
+	if (b["className"]){
+		delete b.className;
+	}
+
+	var aKeys = Object.keys(a).sort();
+	var bKeys = Object.keys(b).sort();
+	return JSON.stringify(aKeys) === JSON.stringify(bKeys);
 }
 
 function isArrayFromOneClass(arr){
