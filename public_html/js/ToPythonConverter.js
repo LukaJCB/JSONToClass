@@ -11,7 +11,7 @@ function ToPythonConverter(jsonReader, className){
 	this.classString += this.writeConstructor();
 	this.classString += this.writeSetters();
 	
-	this.classString += "}\n";
+	this.classString += this.writeClassEnding();
 };
 
 ToPythonConverter.writeClasses = function(){
@@ -173,7 +173,7 @@ ToPythonConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToPythonConverter.prototype.writeClassEnding = function(){
-	return "\n";
+	return "\n\n";
 };
 
 

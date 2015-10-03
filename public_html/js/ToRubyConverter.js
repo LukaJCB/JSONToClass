@@ -135,7 +135,7 @@ ToRubyConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToRubyConverter.prototype.writeClassEnding = function(){
-	return "end\n";
+	return "end\n\n";
 };
 
 

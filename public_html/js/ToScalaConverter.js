@@ -217,7 +217,7 @@ ToScalaConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToScalaConverter.prototype.writeClassEnding = function(){
-	return "}\n";
+	return "}\n\n";
 };
 
 

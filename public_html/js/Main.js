@@ -30,35 +30,77 @@ function downloadData(text,name,fileEnding){
     link.href = textFile;
 }
 
-$( window ).load(function() {
+var previewVisible = false;
+
+$(window).load(function() {
+	
+	var example = '{\n\t"firstName": "John",\n\t"lastName": "Smith",\n\t"age": 25,\n\t"address":\n\t{\n\t\t"streetAddress": "21 2nd Street",\n\t\t"city": "New York",\n\t\t"state": "NY",\n\t\t"postalCode": "10021"\n\t},\n\t"phoneNumber":\n\t[\n\t\t{\n\t\t\t"type": "home",\n\t\t\t"number": "212 555-1234"\n\t\t},\n\t\t{\n\t\t\t"type": "fax",\n\t\t\t"number": "646 555-4567"\n\t\t}\n\t]\n}';
+	$("#json").html(example);
+	
 	$("#downloadlink").click(function(e) {
-		var json = //$("#json").val();
-			'{"totalResultsAvailable": "1827221","totalResultsReturned": 2,"firstResultPosition": 1,"Result": [{"Title": "potato jpg","Summary": "Kentang Si bungsu dari keluarga Solanum tuberosum L ini ternyata memiliki khasiat untuk mengurangi kerutan  jerawat  bintik hitam dan kemerahan pada kulit  Gunakan seminggu sekali sebagai","Url": "http://www.mediaindonesia.com/spaw/uploads/images/potato.jpg","ClickUrl": "http://www.mediaindonesia.com/spaw/uploads/images/potato.jpg","RefererUrl": "http://www.mediaindonesia.com/mediaperempuan/index.php?ar_id=Nzkw","FileSize": 22630,"FileFormat": "jpeg","Height": "362","Width": "532","Thumbnail": {"Url": "http://thm-a01.yimg.com/nimage/557094559c18f16a","Height": "98","Width": "145"}},{"Title": "potato jpg","Summary": "Introduction of puneri aloo This is a traditional potato preparation flavoured with curry leaves and peanuts and can be eaten on fasting day  Preparation time   10 min","Url": "http://www.infovisual.info/01/photo/potato.jpg","ClickUrl": "http://www.infovisual.info/01/photo/potato.jpg","RefererUrl": "http://sundayfood.com/puneri-aloo-indian-%20recipe","FileSize": 119398,"FileFormat": "jpeg","Height": "685","Width": "1024","Thumbnail": {"Url": "http://thm-a01.yimg.com/nimage/7fa23212efe84b64","Height": "107","Width": "160"}}]}';	
-		
+		$("#error").hide();
+		var json = $("#json").val();
 		var selected = $("input[type='radio'][name='language']:checked");
-		if (selected.length > 0) {
-			var str = convertToClass(selected.val(),json,"Window");
-			
-			//TODO
-			console.log(str);
-			//downloadData(str,"ClassA","java");
-			e.preventDefault();
-			e.stopPropagation();
-		} else {
+		var str = convertToClass(selected.val(),json,$("#formTitle").val());
+
+		//TODO
+		//downloadData(str,"ClassA","java");
 		
-			e.preventDefault();
-			e.stopPropagation();
-		}
+		$("#classes").val(str);
+		$("#lang").val(selected.val());
+		$("#names").val(Object.keys(JsonClassReader.classNameAppearances));
 		
+		$("#serverForm").submit();
+		e.preventDefault();
+		e.stopPropagation();
 		
 	});
+	
+	$("#previewButton").click(function(){
+		$("#error").hide();
+		var selected = $("input[type='radio'][name='language']:checked");
+		var str = convertToClass(selected.val(),$("#json").val(), $("#formTitle").val());
+		
+		
+		str = str.replace(/</g,"&lt;");
+		str = str.replace(/>/g,"&gt;");
+		str = str.replace(/\t/g,"&nbsp;&nbsp;&nbsp;&nbsp;");
+		str = str.replace(/\n/g,"<br />");
+		
+		setTimeout(function(){
+			$("#previewWindow p").html(str);
+			$("#previewWindow").show();
+			previewVisible = true;
+		},20);
+		
+	});
+	
+	$("#closePreview").click(function(){
+		$("#previewWindow").hide();
+		previewVisible = false;
+	});
+	
+	$("#content").click(function(){
+		if (previewVisible){
+			$("#previewWindow").hide();
+			previewVisible = false;
+		}
+		
+	});
+	
+
 });
 
 
 function convertToClass(language, json,enclosingClassName){
 	JsonClassReader.clearAll();
-	JsonClassReader.setEnclosingClass( new JsonClassReader(json, enclosingClassName));
-	
+	try {
+		JsonClassReader.setEnclosingClass( new JsonClassReader(json, enclosingClassName));
+	} catch (err){
+		$("#error").html(err);
+		$("#error").show();
+		throw new Error(err);
+	}
 	return getClassString(language);
 }
 

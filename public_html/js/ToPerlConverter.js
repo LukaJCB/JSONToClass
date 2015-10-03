@@ -171,7 +171,7 @@ ToPerlConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToPerlConverter.prototype.writeClassEnding = function(){
-	return "\n";
+	return "\n\n";
 };
 
 

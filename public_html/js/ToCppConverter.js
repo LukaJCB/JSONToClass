@@ -14,7 +14,7 @@ function ToCppConverter(jsonReader, className){
 	this.classString += this.writeObjects();
 	this.classString += this.writeArrays();
 	this.classString += this.writeClassEnding();
-	
+	this.classString += JsonClassReader.fileSeperator;
 	this.classString += this.writeConstructor();
 	this.classString += this.writePrimitiveGetters();
 	this.classString += this.writePrimitiveSetters();
@@ -26,7 +26,7 @@ ToCppConverter.writeClasses = function(){
 	var str = "";
 	for (var name in JsonClassReader.classes){
 		str += new ToCppConverter(JsonClassReader.classes[name],name).classString;
-		
+		str += JsonClassReader.fileSeperator;
 	}
 	
 	
@@ -383,7 +383,7 @@ ToCppConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToCppConverter.prototype.writeClassEnding = function(){
-	return "};\n";
+	return "};\n\n";
 };
 
 

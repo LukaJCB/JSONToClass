@@ -14,7 +14,7 @@ function ToJavaConverter(jsonReader, className){
 	this.javaString += this.writeObjectGetSetters();
 	this.javaString += this.writeArrayGetSetters();
 	
-	this.javaString += "}\n";
+	this.javaString += this.writeClassEnding();
 };
 
 ToJavaConverter.writeClasses = function(){
@@ -256,7 +256,7 @@ ToJavaConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToJavaConverter.prototype.writeClassEnding = function(){
-	return "}";
+	return "}\n\n";
 };
 
 

@@ -10,7 +10,7 @@ function ToSwiftConverter(jsonReader, className){
 	this.classString += this.writeArrays();
 	this.classString += this.writeConstructor();
 	
-	this.classString += "}\n";
+	this.classString += this.writeClassEnding();
 };
 
 ToSwiftConverter.writeClasses = function(){
@@ -157,7 +157,7 @@ ToSwiftConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToSwiftConverter.prototype.writeClassEnding = function(){
-	return "}";
+	return "}\n\n";
 };
 
 

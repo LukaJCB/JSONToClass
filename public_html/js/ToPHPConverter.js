@@ -12,7 +12,7 @@ function ToPHPConverter(jsonReader, className){
 	this.classString += this.writeGetters();
 	this.classString += this.writeSetters();
 	
-	this.classString += "}\n";
+	this.classString += this.writeClassEnding();
 };
 
 ToPHPConverter.writeClasses = function(){
@@ -182,7 +182,7 @@ ToPHPConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToPHPConverter.prototype.writeClassEnding = function(){
-	return "}\n?>";
+	return "}\n\n";
 };
 
 

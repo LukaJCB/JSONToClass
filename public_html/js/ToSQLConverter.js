@@ -117,7 +117,7 @@ ToSQLConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToSQLConverter.prototype.writeClassEnding = function(){
-	return ");\n";
+	return ");\n\n";
 };
 
 

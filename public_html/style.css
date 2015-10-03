@@ -1,10 +1,59 @@
-/*
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
-*/
-/* 
-    Created on : Oct 2, 2015, 6:04:20 PM
-    Author     : Luka
-*/
+body {
+	font-family: helvetica;
+}
 
+#previewWindow {
+	position: absolute;
+	left: 20%;
+	width: 60%;
+	height: 50%;
+	top: 20%;
+	background-color: #eee;
+	overflow: scroll;
+	font-family: courier, monaco;
+	color: #000;
+}
+	
+
+#closePreview {
+	position: fixed;
+	width: 25px;
+	left: 80%;
+}
+
+#json {
+	float:left;
+	width: 80%;
+	height: 400px;
+	resize: none;
+}
+
+#jsonForm {
+	margin-right: auto;
+	margin-left: auto;
+	width: 50%;
+}
+#formTitle {
+	width: 15%;
+}
+
+#jsonForm input  {
+	margin-left: 15px;
+}
+
+#labelTitle {
+	margin-left: 82%;
+	margin-bottom: -2px;
+	font-weight: bold;
+}
+
+#content {
+	width: 100%;
+	height: 90%;
+}
+
+strong {
+	color: #ff0000;
+	margin-top: 20px;
+	float: left;
+}

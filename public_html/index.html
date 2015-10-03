@@ -22,25 +22,44 @@
         <script src="js/Main.js"></script>
     </head>
     <body>
-		<form>
-			<textArea id="json"></textArea>
-			<input type="radio" name="language" value="Java"/>Java<br/>
-			<input type="radio" name="language" value="Cs"/>C#<br/>
-			<input type="radio" name="language" value="Cpp"/>C++<br/>
-			<input type="radio" name="language" value="Php"/>PHP<br/>
-			<input type="radio" name="language" value="Swift"/>Swift<br/>
-			<input type="radio" name="language" value="Python"/>Python<br/>
-			<input type="radio" name="language" value="Ruby"/>Ruby<br/>
-			<input type="radio" name="language" value="Scala"/>Scala<br/>
-			<input type="radio" name="language" value="Groovy"/>Groovy<br/>
-			<input type="radio" name="language" value="Go"/>Go<br/>
-			<input type="radio" name="language" value="ObjC"/>Objective-C<br/>
-			<input type="radio" name="language" value="Perl"/>Perl<br/>
-			<input type="radio" name="language" value="Fs"/>F#<br/>
-			<input type="radio" name="language" value="SQL"/>SQL<br/>
-			<input type="radio" name="language" value="Delphi"/>Delphi<br/>
-			<input type="radio" name="language" value="Matlab"/>Matlab<br/>
-			<a href="" download="info.txt" id="downloadlink">Download</a>
-		</form>
+		<div id="content">
+			<form id="jsonForm" >
+				<h1>JsonToClass</h1>
+				<h2>Select a language and start converting!</h2>
+				<textArea name="classes" id="json" ></textArea>
+				<p id="labelTitle">Object Name:</p>
+				<input type="text" name="title" id="formTitle" value="Customer"/><br/><br/>
+				<input type="radio" name="language" id="Java" checked="checked" value="Java"/><label for="Java">Java </label><br/>
+				<input type="radio" name="language" id="Cs" value="Cs"/><label for="Cs">C#</label><br/>
+				<input type="radio" name="language"  id="Cpp" value="Cpp"/><label for="Cpp">C++ </label><br/>
+				<input type="radio" name="language"  id="Php" value="Php"/><label for="Php">PHP </label><br/>
+				<input type="radio" name="language"  id="Swift" value="Swift"/><label for="Swift">Swift </label><br/>
+				<input type="radio" name="language"  id="Python" value="Python"/><label for="Python">Python </label><br/>
+				<input type="radio" name="language"  id="Ruby" value="Ruby"/><label for="Ruby">Ruby </label><br/>
+				<input type="radio" name="language"  id="Scala" value="Scala"/><label for="Scala">Scala </label><br/>
+				<input type="radio" name="language"  id="Groovy" value="Groovy"/><label for="Groovy">Groovy </label><br/>
+				<input type="radio" name="language"  id="Go" value="Go"/><label for="Go">Go </label><br/>
+				<input type="radio" name="language" id="Perl"  value="Perl"/><label for="Perl">Perl </label><br/>
+				<input type="radio" name="language" id="Fs"  value="Fs"/><label for="Fs">F# </label><br/>
+				<input type="radio" name="language" id="Sql"  value="SQL"/><label for="Sql">SQL </label><br/>
+				<!--<input type="radio" name="language" id="ObjC"  value="ObjC"/><label for="ObjC">Objective-C </label><br/>
+				<input type="radio" name="language" id="Delphi"  value="Delphi"/><label for="Delphi">Delphi </label><br/>
+				<input type="radio" name="language" id="Matlab"  value="Matlab"/><label for="Matlab">Matlab </label><br/>-->
+				<input type="button" value="Preview" id="previewButton"/>
+				<input type="submit" id="downloadlink" value="Download"/>
+				<strong id="error"></strong>
+			</form>
+			<form id="serverForm" hidden="hidden" action="download.php" method="post">
+				<input type="text" name="classes" id="classes"/>
+				<input type="text" name="language" id="lang" />
+				<input type="text" name="names" id="names" />
+			</form>
+		</div>
+		<div id="previewWindow" hidden="hidden">
+			<input type="button" value="x" id="closePreview"/>
+			<p>
+				
+			</p>
+		</div>
 	</body>
 </html>

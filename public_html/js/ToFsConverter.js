@@ -103,7 +103,7 @@ ToFsConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToFsConverter.prototype.writeClassEnding = function(){
-	return "\n";
+	return "\n\n";
 };
 
 

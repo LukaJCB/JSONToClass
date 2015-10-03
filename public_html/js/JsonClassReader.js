@@ -114,6 +114,8 @@ JsonClassReader.assignCorrectClass = function(element, jsonReader){
 	return newClassName;
 };
 
+JsonClassReader.fileSeperator = '"""' + "'''" + '"""' + "'''" + '"""';
+
 JsonClassReader.addClass = function(jsonReader){
 	
 	if (JsonClassReader.classNameAppearances[jsonReader.className]){

@@ -10,7 +10,7 @@ function ToCsConverter(jsonReader, className){
 	this.classString += this.writeArrays();
 	this.classString += this.writeConstructor();
 	
-	this.classString += "}\n";
+	this.classString += this.writeClassEnding();
 };
 
 ToCsConverter.writeClasses = function(){
@@ -161,7 +161,7 @@ ToCsConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToCsConverter.prototype.writeClassEnding = function(){
-	return "}";
+	return "}\n\n";
 };
 
 

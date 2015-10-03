@@ -69,7 +69,7 @@ ToGroovyConverter.prototype.writeNewClassBeginning = function(){
 };
 
 ToGroovyConverter.prototype.writeClassEnding = function(){
-	return "}\n";
+	return "}\n\n";
 };
 
 
