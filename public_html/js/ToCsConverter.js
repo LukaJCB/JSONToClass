@@ -80,11 +80,11 @@ ToCsConverter.prototype.writeConstructor = function(){
 	}	
 
 	for (var name in this.jsonReader.bools){
-		str += " boolean " + name + ",";
+		str += " bool " + name + ",";
 	}	
 
 	for (var name in this.jsonReader.strings){
-		str += " String " + name + ",";
+		str += " string " + name + ",";
 	}	
 
 	for (var name in this.jsonReader.objects){

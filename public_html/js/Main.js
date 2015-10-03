@@ -54,6 +54,8 @@ $( window ).load(function() {
 	});
 });
 
+
+
 function getClassString(language){
 	var classes = "";
 	switch (language){
@@ -89,6 +91,9 @@ function getClassString(language){
 		break;
 	case "Ruby":
 		classes = ToRubyConverter.writeClasses();
+		break;
+	case "Perl":
+		classes = ToPerlConverter.writeClasses();
 		break;
 	case "Delphi":
 		classes = ToDelphiConverter.writeClasses();
