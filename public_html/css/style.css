@@ -57,3 +57,14 @@ strong {
 	margin-top: 20px;
 	float: left;
 }
+
+footer {
+	position: absolute;
+	width: 50%;
+	left: 25%;
+	margin-top: 20%;
+}
+
+footer a{
+	text-decoration: none;
+}
