@@ -169,7 +169,8 @@ ToPythonConverter.writeMain = function(){
 
 
 ToPythonConverter.prototype.writeNewClassBeginning = function(){
-	return "class " + this.className + ":\n";
+	var str = JsonClassReader.fileSeperator;
+	return str += "class " + this.className + ":\n";
 };
 
 ToPythonConverter.prototype.writeClassEnding = function(){

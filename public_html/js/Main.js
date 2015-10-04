@@ -45,10 +45,12 @@ $(window).load(function() {
 
 		//TODO
 		//downloadData(str,"ClassA","java");
+		var arr = str.split(JsonClassReader.fileSeperator);
 		
-		$("#classes").val(str);
+		
+		$("#classes").val(JSON.stringify(arr));
 		$("#lang").val(selected.val());
-		$("#names").val(Object.keys(JsonClassReader.classNameAppearances));
+		$("#names").val(JSON.stringify(Object.keys(JsonClassReader.classNameAppearances)));
 		
 		$("#serverForm").submit();
 		e.preventDefault();
@@ -61,10 +63,12 @@ $(window).load(function() {
 		var selected = $("input[type='radio'][name='language']:checked");
 		var str = convertToClass(selected.val(),$("#json").val(), $("#formTitle").val());
 		
-		
+		var regex = new RegExp(JsonClassReader.fileSeperator, "g");
+		str = str.replace(regex,"\n" );
 		str = str.replace(/</g,"&lt;");
 		str = str.replace(/>/g,"&gt;");
 		str = str.replace(/\t/g,"&nbsp;&nbsp;&nbsp;&nbsp;");
+		str = str.replace(/ /g,"&nbsp;");
 		str = str.replace(/\n/g,"<br />");
 		
 		setTimeout(function(){

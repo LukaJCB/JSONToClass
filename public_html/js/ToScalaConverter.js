@@ -213,7 +213,8 @@ ToScalaConverter.writeMain = function(){
 
 
 ToScalaConverter.prototype.writeNewClassBeginning = function(){
-	return "class " + this.className + "(){\n";
+	var str = JsonClassReader.fileSeperator;
+	return str += "class " + this.className + "(){\n";
 };
 
 ToScalaConverter.prototype.writeClassEnding = function(){

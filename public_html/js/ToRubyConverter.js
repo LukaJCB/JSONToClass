@@ -131,7 +131,8 @@ ToRubyConverter.prototype.writeConstructor = function(){
 
 
 ToRubyConverter.prototype.writeNewClassBeginning = function(){
-	return "class " + this.className + "\n";
+	var str = JsonClassReader.fileSeperator;
+	return str += "class " + this.className + "\n";
 };
 
 ToRubyConverter.prototype.writeClassEnding = function(){

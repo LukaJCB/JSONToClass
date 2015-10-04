@@ -178,7 +178,8 @@ ToPHPConverter.writeMain = function(){
 
 
 ToPHPConverter.prototype.writeNewClassBeginning = function(){
-	return "<?php\nclass " + this.className + "{\n";
+	var str = JsonClassReader.fileSeperator;
+	return str +="<?php\nclass " + this.className + "{\n";
 };
 
 ToPHPConverter.prototype.writeClassEnding = function(){

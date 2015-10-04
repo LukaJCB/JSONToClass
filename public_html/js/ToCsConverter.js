@@ -157,7 +157,10 @@ ToCsConverter.writeMain = function(){
 
 
 ToCsConverter.prototype.writeNewClassBeginning = function(){
-	return "public class " + this.className + "{\n";
+	
+	var str = JsonClassReader.fileSeperator;
+	str +="public class " + this.className + "{\n";
+	return str;
 };
 
 ToCsConverter.prototype.writeClassEnding = function(){

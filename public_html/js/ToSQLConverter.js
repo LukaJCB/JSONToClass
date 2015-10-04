@@ -113,7 +113,8 @@ ToSQLConverter.prototype.writePrimitiveProperties = function(){
 
 
 ToSQLConverter.prototype.writeNewClassBeginning = function(){
-	return "CREATE TABLE " + this.className + "(\n";
+	var str = JsonClassReader.fileSeperator;
+	return str += "CREATE TABLE " + this.className + "(\n";
 };
 
 ToSQLConverter.prototype.writeClassEnding = function(){
