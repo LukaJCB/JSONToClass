@@ -8,7 +8,9 @@
 		<meta name="description" content="Json to class, generate classes in any language or sql tables from a json string, works with java, c#, c++,php,swift,python,ruby,scala,groovy,go,perl, f#.">
 		<meta name="author" content="Luka Jacobowitz">
 		<link rel="stylesheet" href="css/style.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
         <script src="js/jquery.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script src="js/ToJavaConverter.js"></script>
         <script src="js/ToCsConverter.js"></script>
         <script src="js/ToFsConverter.js"></script>
@@ -41,11 +43,11 @@
 				<input type="radio" name="language"  id="Ruby" value="Ruby"/><label for="Ruby">Ruby </label><br/>
 				<input type="radio" name="language"  id="Scala" value="Scala"/><label for="Scala">Scala </label><br/>
 				<input type="radio" name="language"  id="Groovy" value="Groovy"/><label for="Groovy">Groovy </label><br/>
-				<input type="radio" name="language"  id="Go" value="Go"/><label for="Go">Go </label><br/>
 				<input type="radio" name="language" id="Perl"  value="Perl"/><label for="Perl">Perl </label><br/>
 				<input type="radio" name="language" id="Fs"  value="Fs"/><label for="Fs">F# </label><br/>
 				<input type="radio" name="language" id="Sql"  value="SQL"/><label for="Sql">SQL </label><br/>
 				<!--<input type="radio" name="language" id="ObjC"  value="ObjC"/><label for="ObjC">Objective-C </label><br/>
+				<input type="radio" name="language"  id="Go" value="Go"/><label for="Go">Go </label><br/>
 				<input type="radio" name="language" id="Delphi"  value="Delphi"/><label for="Delphi">Delphi </label><br/>
 				<input type="radio" name="language" id="Matlab"  value="Matlab"/><label for="Matlab">Matlab </label><br/>-->
 				<input type="button" value="Preview" id="previewButton"/>
@@ -63,11 +65,20 @@
 				<input type="text" name="names" id="names" />
 			</form>
 		</div>
-		<div id="previewWindow" hidden="hidden">
-			<input type="button" value="x" id="closePreview"/>
-			<p>
-				
-			</p>
-		</div>
+		
+		<div class="modal fade" id="previewPopup" tabindex="-1" role="dialog" hidden>
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<pre class="prettyprint linenums">
+						</pre>
+					</div>
+				 </div>
+			</div>
+		 </div>
+		
 	</body>
 </html>

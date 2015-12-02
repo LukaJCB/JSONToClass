@@ -72,21 +72,20 @@ $(window).load(function() {
 		str = str.replace(/\n/g,"<br />");
 		
 		setTimeout(function(){
-			$("#previewWindow p").html(str);
-			$("#previewWindow").show();
-			previewVisible = true;
+			$("#previewPopup pre").html(str);
+			$("#previewPopup").modal();
 		},20);
 		
 	});
 	
 	$("#closePreview").click(function(){
-		$("#previewWindow").hide();
+		$("#previewPopup").hide();
 		previewVisible = false;
 	});
 	
 	$("#content").click(function(){
 		if (previewVisible){
-			$("#previewWindow").hide();
+			$("#previewPopup").hide();
 			previewVisible = false;
 		}
 		

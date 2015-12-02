@@ -1,24 +1,8 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata);
+
+
 body {
 	font-family: helvetica;
-}
-
-#previewWindow {
-	position: absolute;
-	left: 20%;
-	width: 60%;
-	height: 50%;
-	top: 20%;
-	background-color: #eee;
-	overflow: scroll;
-	font-family: courier, monaco;
-	color: #000;
-}
-	
-
-#closePreview {
-	position: fixed;
-	width: 25px;
-	left: 80%;
 }
 
 #json {

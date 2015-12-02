@@ -116,7 +116,8 @@ ToCppConverter.prototype.writeConstructor = function(){
 	var str = "#include <string>\n";
 	str += '#include "' + this.className + '.h"\n\n';
 
-	str += "using std::string;\n\n";
+	str += "using std::string;\n";
+	str += "using std::vector;\n\n";
 
 	str	+=  this.className + "::" + this.className + "(){\n";
 	str += "}\n\n";
@@ -384,7 +385,8 @@ ToCppConverter.prototype.writeNewClassBeginning = function(){
 	var str = JsonClassReader.fileSeperator;
 	str += "#include <string>\n\n";
 
-	str += "using std::string;\n\n";
+	str += "using std::string;\n";
+	str += "using std::vector;\n\n";
 	str += "class " + this.className + "{\n";
 	return str;
 };
