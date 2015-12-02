@@ -252,7 +252,8 @@ ToJavaConverter.writeMain = function(){
 
 
 ToJavaConverter.prototype.writeNewClassBeginning = function(){
-	return "public class " + this.className + "{\n";
+	var str = JsonClassReader.fileSeperator;
+	return str += "public class " + this.className + "{\n";
 };
 
 ToJavaConverter.prototype.writeClassEnding = function(){

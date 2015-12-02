@@ -153,7 +153,8 @@ ToSwiftConverter.writeMain = function(){
 
 
 ToSwiftConverter.prototype.writeNewClassBeginning = function(){
-	return "public class " + this.className + "{\n";
+	var str = JsonClassReader.fileSeperator;
+	return str += "public class " + this.className + "{\n";
 };
 
 ToSwiftConverter.prototype.writeClassEnding = function(){

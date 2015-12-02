@@ -4,8 +4,11 @@
         <title>JsonToClass</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="style.css"/>
-        <script src="js/libs/jquery/jquery.js"></script>
+		<meta name="keywords" content="json, c#,f#,fsharp, converter, generator, classes,java,c++,cpp,php,swift,python,ruby,scala,groovy,go,perl,sql,table, csharp, convert, generate, code generation, javascript">
+		<meta name="description" content="Json to class, generate classes in any language or sql tables from a json string, works with java, c#, c++,php,swift,python,ruby,scala,groovy,go,perl, f#.">
+		<meta name="author" content="Luka Jacobowitz">
+		<link rel="stylesheet" href="css/style.css"/>
+        <script src="js/jquery.js"></script>
         <script src="js/ToJavaConverter.js"></script>
         <script src="js/ToCsConverter.js"></script>
         <script src="js/ToFsConverter.js"></script>
@@ -49,6 +52,11 @@
 				<input type="submit" id="downloadlink" value="Download"/>
 				<strong id="error"></strong>
 			</form>
+			<footer>
+				<a href="https://github.com/LukaJCB">Developed by Luka Jacobowitz</a> <br/>
+				<iframe src="https://ghbtns.com/github-btn.html?user=lukajcb&type=follow&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+				<iframe src="https://ghbtns.com/github-btn.html?user=lukajcb&repo=jsontoclass&type=star&count=true" frameborder="0" scrolling="0" width="170px" height="20px"></iframe>
+			</footer>
 			<form id="serverForm" hidden="hidden" action="download.php" method="post">
 				<input type="text" name="classes" id="classes"/>
 				<input type="text" name="language" id="lang" />

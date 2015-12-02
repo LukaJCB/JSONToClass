@@ -99,7 +99,9 @@ ToFsConverter.prototype.writeConstructor = function(){
 
 
 ToFsConverter.prototype.writeNewClassBeginning = function(){
-	return "type " + this.className;
+	
+	var str = JsonClassReader.fileSeperator;
+	return str += "type " + this.className;
 };
 
 ToFsConverter.prototype.writeClassEnding = function(){

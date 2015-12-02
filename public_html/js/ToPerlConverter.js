@@ -167,7 +167,8 @@ ToPerlConverter.prototype.writeSetters = function(){
 
 
 ToPerlConverter.prototype.writeNewClassBeginning = function(){
-	return "package " + this.className + ";\n\n";
+	var str = JsonClassReader.fileSeperator;
+	return str += "package " + this.className + ";\n\n";
 };
 
 ToPerlConverter.prototype.writeClassEnding = function(){
